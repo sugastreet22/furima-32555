@@ -1,12 +1,15 @@
 ## users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| name     | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
-| identify | string | null: false |
-| birthday | string | null: false |
+| Column              | Type   | Options     |
+| --------            | ------ | ----------- |
+| name                | string | null: false |
+| email               | string | null: false |
+| encrypted_password  | string | null: false |
+| lastname            | string | null: false |
+| firstname           | string | null: false |
+| lastnamekana        | string | null: false |
+| firstnamekana       | string | null: false |
+| date                | string | null: false |
 
 ### Association
 
@@ -16,15 +19,17 @@
 
 ## items テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| image    | null   | null: false |
-| product  | string | null: false |
-| explain  | text   | null: false |
-| category | string | null: false |
-| delivery | string | null: false |
-| price    | string | null: false |
-| user_id  | references | foreign_key: true |
+| Column       | Type       | Options           |
+| --------     | ------     | -----------       |
+| product      | string     | null: false       |
+| explain      | text       | null: false       |
+| category_id  | integer    | null: false       |
+| condition_id | integer    | null: false       |
+| burden_id    | integer    | null: false       |
+| area_id      | integer    | null: false       |
+| day_id       | integer    | null: false       |
+| price        | string     | null: false       |
+| user         | references | foreign_key: true |
 
 ### Association
 
@@ -35,13 +40,10 @@
 
 ## purchases テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| information   | string | null: false |
-| deadline  | string | null: false |
-| security   | string | null: false |
-| item_id  | references | foreign_key: true |
-| user_id  | references | foreign_key: true |
+| Column   | Type       | Options           |
+| -------- | ------     | -----------       |
+| item     | references | foreign_key: true |
+| user     | references | foreign_key: true |
 
 ### Association
 
@@ -52,15 +54,15 @@
 
 ## addresses テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| postal   | string | null: false |
-| prefecture  | string | null: false |
-| city  | string | null: false |
-| block  | string | null: false |
-| building  | string | null: false |
-| number  | string | null: false |
-
+| Column        | Type       | Options           |
+| --------      | ------     | -----------       |
+| postal        | string     | null: false       |
+| prefecture    | string     | null: false       |
+| city          | string     | null: false       |
+| block         | string     | null: false       |
+| building      | string     |                   |
+| number        | string     | null: false       |
+| purchase      | references | foreign_key: true |
 ### Association
 
 - belong_to :purchases

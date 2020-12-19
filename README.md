@@ -9,7 +9,7 @@
 | firstname           | string | null: false |
 | lastnamekana        | string | null: false |
 | firstnamekana       | string | null: false |
-| date                | string | null: false |
+| birthday            | date   | null: false |
 
 ### Association
 
@@ -33,8 +33,8 @@
 
 ### Association
 
-- belongs_to :users
-- has_one :purchases
+- belongs_to :user
+- has_one :purchase
 
 
 
@@ -47,9 +47,9 @@
 
 ### Association
 
-- belong_to :users
-- belong_to :items
-- has_one :addresses
+- belong_to :user
+- belong_to :item
+- has_one :address
 
 
 ## addresses テーブル
@@ -57,15 +57,16 @@
 | Column        | Type       | Options           |
 | --------      | ------     | -----------       |
 | postal        | string     | null: false       |
-| prefecture    | string     | null: false       |
+| area_id       | integer    | null: false       |
 | city          | string     | null: false       |
 | block         | string     | null: false       |
 | building      | string     |                   |
 | number        | string     | null: false       |
 | purchase      | references | foreign_key: true |
+
 ### Association
 
-- belong_to :purchases
+- belong_to :purchase
 
 
 

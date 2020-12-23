@@ -97,7 +97,7 @@ describe User do
       it 'email：@がない場合は登録できない' do
         @user.email = '@'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it '姓：全角（漢字・ひらがな・カタカナ）以外は登録できない' do
         @user.lastname = 'aaa'

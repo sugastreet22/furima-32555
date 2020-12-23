@@ -81,6 +81,44 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid. Password can't be blank")
       end
+
+      it 'password:数字のみは登録できない' do
+        @user.password = '111111'
+        @user.password_confirmation = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Password can't be blank")
+      end
+      it 'password:全角英数混合は登録できない' do
+        @user.password = '１１１ｋｋｋ'
+        @user.password_confirmation = '１１１ｋｋｋ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Password can't be blank")
+      end
+      it 'email：@がない場合は登録できない' do
+        @user.email = '@'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
+      it '姓：全角（漢字・ひらがな・カタカナ）以外は登録できない' do
+        @user.lastname = 'aaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Lastname is invalid. Last name can't be blank.")
+      end
+      it '名：全角（漢字・ひらがな・カタカナ）以外は登録できない' do
+        @user.firstname = 'aaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Firstname is invalid. First name can't be blank.")
+      end
+      it '姓（フリガナ）：全角（カタカナ）以外は登録できない' do
+        @user.lastnamekana = '亜あaA'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Lastnamekana is invalid. Last name kana can't be blank.")
+      end
+      it '名（フリガナ）：全角（カタカナ）以外は登録できない' do
+        @user.firstnamekana = '亜あaA'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Firstnamekana is invalid. First name kana can't be blank.")
+      end
     end
   end
 end

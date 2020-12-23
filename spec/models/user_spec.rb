@@ -17,18 +17,50 @@ describe User do
     end
 
     context '新規登録がうまくいかないとき' do
-      it 'nameとemail、passwordとpassword_confirmation、lastnameとfirstname、lastnamekanaとfirstnamekana、birthday空だと登録できない' do
+      it 'nameが空では登録できない' do
         @user.name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Name can't be blank")
+      end
+      it 'emailが空では登録できない' do
         @user.email = ''
-        @user.password = ''
-        @user.password_confirmation = ''
-        @user.lastname = ''
-        @user.firstname = ''
-        @user.lastnamekana = ''
-        @user.firstnamekana = ''
-        @user.birthday = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
+      end
+      it 'passwordが空では登録できない' do
+        @user.password = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password can't be blank")
+      end
+      it 'passwordが存在してもpassword_confirmationが空では登録できない' do
+        @user.password_confirmation = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it 'lastnameが空では登録できない' do
+        @user.lastname = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Lastname can't be blank")
+      end
+      it 'firstnameが空では登録できない' do
+        @user.firstname = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Firstname can't be blank")
+      end
+      it 'lastnamekanaが空では登録できない' do
+        @user.lastnamekana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Lastnamekana can't be blank")
+      end
+      it 'firstnamekanaが空では登録できない' do
+        @user.firstnamekana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Firstnamekana can't be blank")
+      end
+      it 'birthdayが空では登録できない' do
+        @user.birthday = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
       it '重複したemailが存在する場合登録できない' do
         @user.save

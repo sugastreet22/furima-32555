@@ -1,5 +1,68 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @item = FactoryBot.build(:item)
+  end
+
+  describe '商品の保存' do
+    context "商品が保存できる場合" do
+      it "画像、商品名、説明、詳細、カテゴリー、状態、負担、地域、日数、価格があれば商品は保存される" do
+        expect(@item).to be_valid
+      end
+    end
+
+    context "商品が保存できない場合" do
+      it "画像がないと商品は保存できない" do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end     
+      it "商品名がないと商品は保存できない" do
+        @item.product = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Product can't be blank")
+      end
+      it "説明がないと商品は保存できない" do
+        @item.explain = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Explain can't be blank")
+      end
+      it "カテゴリーがないと商品は保存できない" do
+        @item.category_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+      it "状態がないと商品は保存できない" do
+        @item.condition_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it "負担がないと商品は保存できない" do
+        @item.burden_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Burden can't be blank")
+      end
+      it "地域がないと商品は保存できない" do
+        @item.area_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Area can't be blank")
+      end
+      it "日数がないと商品は保存できない" do
+        @item.day_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day can't be blank")
+      end
+      it "価格がないと商品は保存できない" do
+        @item.price = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it "ユーザーが紐付いていないと商品は保存できない" do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+    end
+  end
 end

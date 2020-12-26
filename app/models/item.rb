@@ -17,6 +17,7 @@ class Item < ApplicationRecord
     validates :day_id
     validates :price
     validates :user
+    validates :image
   end
   validates :category_id, numericality: { other_than: 1 } 
   validates :condition_id, numericality: { other_than: 1 } 

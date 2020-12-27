@@ -58,10 +58,39 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
+      it "半角英数混合では登録できないこと" do
+        @item.price = "11aa"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid", "Price is not a number")
+      end
+      it "半角英語だけでは登録できないこと" do
+        @item.price = "aaa"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid", "Price is not a number")
+      end
+      it "299円以下では登録できないこと" do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+      it "10,000,000以上では登録できないこと" do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
       it "ユーザーが紐付いていないと商品は保存できない" do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("User must exist")
+      end
+      it "ActiveHashのidが1のときは登録できない" do
+        @item.category_id = 1
+        @item.condition_id = 1
+        @item.burden_id = 1
+        @item.area_id = 1
+        @item.day_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1", "Condition must be other than 1", "Burden must be other than 1", "Area must be other than 1", "Day must be other than 1")
       end
     end
   end

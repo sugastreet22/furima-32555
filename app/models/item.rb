@@ -15,7 +15,9 @@ class Item < ApplicationRecord
     validates :burden_id
     validates :area_id
     validates :day_id
+    with_options format: { with: /\A[0-9]+\z/ } do
     validates :price
+    end
     validates :user
     validates :image
   end
@@ -24,5 +26,6 @@ class Item < ApplicationRecord
   validates :burden_id, numericality: { other_than: 1 } 
   validates :area_id, numericality: { other_than: 1 } 
   validates :day_id, numericality: { other_than: 1 } 
+  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 end
 

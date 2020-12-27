@@ -7,7 +7,7 @@ FactoryBot.define do
     burden_id {2} 
     area_id {22}     
     day_id {2}      
-    price {Faker::Lorem.sentence}
+    price {301}
     association :user
 
     after(:build) do |item|

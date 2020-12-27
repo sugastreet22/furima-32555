@@ -83,14 +83,30 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("User must exist")
       end
-      it "ActiveHashのidが1のときは登録できない" do
+      it "category_idのActiveHashのidが1のときは登録できない" do
         @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+      it "condition_idのActiveHashのidが1のときは登録できない" do
         @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+      end
+      it "burden_idのActiveHashのidが1のときは登録できない" do
         @item.burden_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Burden must be other than 1")
+      end
+      it "area_idのActiveHashのidが1のときは登録できない" do
         @item.area_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Area must be other than 1")
+      end
+      it "day_idのActiveHashのidが1のときは登録できない" do
         @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1", "Condition must be other than 1", "Burden must be other than 1", "Area must be other than 1", "Day must be other than 1")
+        expect(@item.errors.full_messages).to include("Day must be other than 1")
       end
     end
   end

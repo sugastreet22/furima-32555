@@ -62,7 +62,7 @@
 | block         | string     | null: false       |
 | building      | string     |                   |
 | number        | string     | null: false       |
-| purchase      | references | foreign_key: true |
+| order         | references | foreign_key: true |
 
 ### Association
 

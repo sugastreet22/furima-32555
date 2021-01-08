@@ -1,6 +1,6 @@
 class UserItem
   include ActiveModel::Model
-  attr_accessor :postal, :area_id, :city, :block, :building, :number, :user_id, :item_id
+  attr_accessor :token, :postal, :area_id, :city, :block, :building, :number, :user_id, :item_id
 
   with_options presence: true do
     validates :postal, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
@@ -8,8 +8,9 @@ class UserItem
     validates :city
     validates :block
     validates :number, format: { with: /\A\d{10,11}\z/, message: "Phone number can't be blank" }
-    # validates :user_id
-    # validates :item_id
+    validates :user_id
+    validates :item_id
+    validates :token
   end
 
   def save

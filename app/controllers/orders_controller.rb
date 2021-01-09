@@ -1,8 +1,14 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
   before_action :sold_out_item, only: [:index]
+
   def index
-    @user_item = UserItem.new
+    if current_user.id != @item.user_id  #出品者以外
+      @user_item = UserItem.new 
+    else
+      redirect_to root_path #出品者だとトップページに戻す
+    end
   end
 
   def create
@@ -37,4 +43,6 @@ class OrdersController < ApplicationController
     def sold_out_item
       redirect_to root_path if @item.order.present?
     end
+
+    
 end

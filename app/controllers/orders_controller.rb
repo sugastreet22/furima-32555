@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
-
+  before_action :sold_out_item, only: [:index]
   def index
     @user_item = UserItem.new
   end
@@ -32,5 +32,9 @@ class OrdersController < ApplicationController
         card: item_params[:token],    
         currency: 'jpy'                 
       )
+    end
+
+    def sold_out_item
+      redirect_to root_path if @item.order.present?
     end
 end

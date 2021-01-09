@@ -12,6 +12,7 @@ RSpec.describe UserItem, type: :model do
         expect(@user_item).to be_valid
       end
       it '建物名が空でも購入できること' do
+        @user_item.building = nil
         expect(@user_item).to be_valid
       end
     end

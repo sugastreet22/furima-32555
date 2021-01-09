@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  before do
-    @item = FactoryBot.build(:item)
-  end
-
-  describe '商品の保存' do
-      it "画像、商品名、説明、詳細、カテゴリー、状態、負担、地域、日数、価格があれば商品は保存される" do
-        expect(@item).to be_valid
-      end
+  describe '商品情報入力' do
+    before do
+      @item = FactoryBot.build(:item)
     end
+
+    context '商品の保存' do
+        it "画像、商品名、説明、詳細、カテゴリー、状態、負担、地域、日数、価格があれば商品は保存される" do
+          expect(@item).to be_valid
+        end
+      end
 
     context "商品が保存できない場合" do
       it "画像がないと商品は保存できない" do

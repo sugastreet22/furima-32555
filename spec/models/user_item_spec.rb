@@ -3,13 +3,10 @@ require 'rails_helper'
 RSpec.describe UserItem, type: :model do
   describe '送り先情報を保存' do
     before do
-      user = FactoryBot.create(:user)
-      order = FactoryBot.create(:order)
-      item = FactoryBot.create(:item user.id = order.id) 
-
-      @user_item = FactoryBot.build(:user_item)
+      buyer = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @user_item = FactoryBot.build(:user_item, user_id:buyer.id, item_id:item.id)
       sleep(0.1)
-      
     end
 
     context '商品の購入できる場合' do
